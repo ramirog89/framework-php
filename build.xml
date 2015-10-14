@@ -1,0 +1,84 @@
+<project name="Vijoyas" default="build" basedir=".">
+  <description>
+    Empaquetado de proyecto, tests y reportes
+  </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="${basedir}/src"/>
+  <property name="build" location="${basedir}/build"/>
+  <property name="tests" location="${basedir}/tests" />
+
+  <target name="build" 
+    depends="clean,prepare,phpcs,phpdoc,metric">
+  </target>
+
+  <target name="clean"
+        description="Cleanup build artifacts">
+    <delete dir="${build}/coverage"/>
+    <delete dir="${build}/logs"/>
+    <delete dir="${build}/codesniffer"/>
+    <delete dir="${build}/documentation"/>
+    <delete dir="${build}/metric"/>
+  </target>
+
+  <target name="prepare"
+        description="Prepare directories for new build">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+    <mkdir dir="${build}/coverage"/>
+    <mkdir dir="${build}/logs"/>
+    <mkdir dir="${build}/codesniffer"/>
+    <mkdir dir="${build}/documentation"/>
+    <mkdir dir="${build}/metric"/>
+  </target>
+
+  <target name="git"
+        description="Update repository from master">
+    <exec executable="git" >
+        <arg value="-c" />
+    </exec>
+  </target>
+
+  <target name="phpunit"
+        description="Run unit tests with PHPUnit">
+    <exec dir="${src}" executable="phpunit" failonerror="true" >
+        <arg value="-c" />
+        <arg value="${basedir}/phpunit.xml" />
+        <arg value="-v" />
+        <arg value="${tests}/" />
+    </exec>
+  </target>
+
+  <target name="phpcs" depends="phpunit"
+        description="Check code with PHPCodeSniffer">
+    <exec executable="phpcs">
+        <arg value="-n" />
+        <arg path="${src}" />
+        <arg value="--standard=Zend" />
+        <arg value="--extensions=php" />
+        <!-- <arg value="-ignore" />  -->
+        <!-- <arg value="php" /> -->
+        <arg value="--report-full=${build}/codesniffer/full.txt" />
+        <arg value="--report-summary=${build}/codesniffer/summary.txt" />
+    </exec>
+  </target>
+
+  <target name="phpdoc"
+        description="Generate project source documentation with PHPDoc">
+    <exec executable="phpdoc" dir="${src}">
+        <arg value="-d" />
+        <arg value="${src}" />
+        <arg value="-t" />
+        <arg value="${build}/documentation" />
+    </exec>
+  </target>
+
+  <target name="metric">
+  </target>
+
+  <target name="deploy">
+    <!-- va a subir el git de un branch a otro -->
+  </target>
+
+</project>

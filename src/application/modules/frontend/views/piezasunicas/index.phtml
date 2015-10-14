@@ -1,0 +1,22 @@
+
+
+			<div class="index-content tituloCatalogo">
+				<h2>Piezas &uacute;nicas <small>Lo m&aacute;s innovador</small></h2>
+				<span class="dash"></span>
+			</div>
+			
+			<div class="index-content catalogoProductos imagenes isotope">
+               <?php foreach ($this->contenido as $index => $archivo): ?> 
+                    <?php $file = "/public/assets/contenido/piezasunicas/$archivo"; ?>
+                    <div class="imagen element-item piezasunicas">
+                        <a href="<?php echo $file; ?>" data-lightbox="image-<?php echo $index; ?>" data-title="<?php echo $archivo; ?>">
+                            <img src="<?php echo $file; ?>" />
+                        </a>
+                        <div class="caracteristicas">
+                            <h3><?php echo $archivo; ?></h3>
+                            <p>descripcion</p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+			</div>
+			<div class="clearfix"></div>

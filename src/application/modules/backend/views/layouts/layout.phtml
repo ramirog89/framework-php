@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Administrador</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Avant">
+    <meta name="author" content="The Red Team">
+
+    <link rel="stylesheet" href="../public/assets/css/backend/styles.min.css">
+    <link href='../public/assets/css/backend/sidebar-green.css' rel='stylesheet' type='text/css' media='all' id='styleswitcher'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+
+<?php echo $this->headContent(); ?>
+</head>
+
+<body class=" show-rightbar">
+
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+        <ul class="nav navbar-nav pull-right toolbar">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">
+                    <?php //echo $this->user->getUsuario(); ?>
+                </a>
+                <ul class="dropdown-menu userinfo arrow">
+                    <li class="username">
+                        <a href="#">
+                            <div><h5>Hola, <?php //echo $this->user->getNombre(); ?>!</h5></div>
+                        </a>
+                    </li>
+                    <li class="userlinks">
+                        <ul class="dropdown-menu">
+                            <li><a href="/admin/auth/logout" class="text-right">Salir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+
+    <div id="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <nav id="page-leftbar" role="navigation">
+                <!-- BEGIN SIDEBAR MENU -->
+            <ul class="acc-menu" id="sidebar">
+                <li><a href="/admin/"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+                <li><a href="/admin/colecciones"><i class="fa fa-th"></i> <span>Colecciones</span></a></li>
+                <li><a href="/admin/piezas-unicas"><i class="fa fa-list-ol"></i> <span>Piezas &uacute;nicas</span></a></li>
+                <li><a href="/admin/proyectos"><i class="fa fa-tasks"></i> <span>Proyectos</span></a></li>
+                <li class="divider"></li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </nav>
+
+    <div id="page-content">
+        <div id='wrap'>
+            <?php $this->getContent(); ?>
+        </div> <!--wrap -->
+    </div> <!-- page-content -->
+
+    <footer role="contentinfo">
+        <div class="clearfix">
+            <ul class="list-unstyled list-inline">
+                <li>RABIA &copy; 2013</li>
+                <button class="pull-right btn btn-inverse-alt btn-xs hidden-print" id="back-to-top"><i class="fa fa-arrow-up"></i></button>
+            </ul>
+        </div>
+    </footer>
+
+</div> <!-- page-container -->
+
+<script type='text/javascript' src='../public/assets/js/backend/jquery-1.10.2.min.js'></script> 
+<script type='text/javascript' src='../public/assets/js/backend/jqueryui-1.10.3.min.js'></script> 
+<script type='text/javascript' src='../public/assets/js/backend/bootstrap.min.js'></script> 
+<?php echo $this->footerContent(); ?>
+<script type='text/javascript' src='../public/assets/js/backend/application.js'></script> 
+
+</body>
+</html>

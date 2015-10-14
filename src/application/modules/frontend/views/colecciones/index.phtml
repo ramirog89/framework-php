@@ -1,0 +1,20 @@
+
+
+			<div class="index-content tituloCatalogo">
+				<h2>Colecciones<small>Las más lindas colecciones</small></h2>
+				<span class="dash"></span>
+			</div>
+
+            <?php $lista = $this->verListaImagenesDeCarpeta( $this->imagesDirectory ); ?>
+
+			<div class="index-content">
+                <div class="row">
+                    <?php echo $lista->getFiltros(); ?>
+                </div><!-- row -->
+            </div>
+			
+			<div class="index-content catalogoProductos imagenes isotope">
+                <?php echo $lista->getLista(); ?> 
+			</div>
+			<div class="clearfix"></div>
+

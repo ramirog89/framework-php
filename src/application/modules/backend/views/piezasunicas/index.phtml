@@ -1,0 +1,250 @@
+        <div id="page-heading">
+            <ol class="breadcrumb">
+                <li><a href="index.php">Dashboard</a></li>
+                <li class="active">Articulos</li>
+            </ol>
+
+            <h1>Articulos</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                            <h4>Agregar Articulos</h4>
+                            <div class="options">   
+                                <a href="javascript:;"><i class="fa fa-cog"></i></a>
+                                <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+
+                            <!-- The file upload form used as target for the file upload widget -->
+                            <form id="fileupload" action="/api/articulos/add" method="POST" enctype="multipart/form-data">
+                                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                                <div class="row fileupload-buttonbar">
+                                    <div class="col-lg-7">
+                                    <div class="btn-toolbar">
+                                        <!-- The fileinput-button span is used to style the file input field as button -->
+                                        <span class="btn btn-success fileinput-button">
+                                            <i class="fa fa-plus"></i>
+                                            <span>Add files...</span>
+                                            <input type="file" name="files[]" multiple>
+                                        </span>
+                                        <button type="submit" class="btn btn-primary start">
+                                            <i class="fa fa-upload"></i>
+                                            <span>Start upload</span>
+                                        </button>
+                                        <button type="reset" class="btn btn-warning cancel">
+                                            <i class="fa fa-ban"></i>
+                                            <span>Cancel upload</span>
+                                        </button>
+<!--
+                                        <button type="button" class="btn btn-danger delete">
+                                            <i class="fa fa-trash-o"></i>
+                                            <span>Delete</span>
+                                        </button>
+                                        <input type="checkbox" class="toggle">
+                                        The loading indicator is shown during file processing 
+-->
+                                        <span class="fileupload-loading"></span>
+                                    </div>
+                                    </div>
+                                    <!-- The global progress information -->
+                                    <div class="col-lg-5 fileupload-progress fade">
+                                        <!-- The global progress bar -->
+                                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                        </div>
+                                        <!-- The extended global progress information -->
+                                        <div class="progress-extended">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <!-- The table listing the files available for upload/download -->
+                                <table role="presentation" class="table table-striped">
+                                    <tbody class="files"></tbody>
+                                </table>
+
+                                <input type="hidden" name="vestuario" value="" id="vestuario-id">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                            <h4>Lista de Articulos</h4>
+                            <div class="options">   
+                                <a href="javascript:;"><i class="fa fa-cog"></i></a>
+                                <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+
+                            <div id="crudtable_wrapper" class="dataTables_wrapper" role="grid">
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="crudtable">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoria</th>
+                                            <th>Color</th>
+                                            <th>Talle</th>
+                                            <th>Sexo</th>
+                                            <th>Precio</th>
+                                            <th>Imagen</th>
+                                            <th>Stock</th>
+                                            <th>Borrar</th>
+                                            <th style="display: none">Id</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($this->articulos as $articulo): ?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $articulo->getCategoria()->getNombre();  ?></td>
+                                            <td><?php echo $articulo->getColor(); ?></td>
+                                            <td><?php echo $articulo->getTalle(); ?></td>
+                                            <td><?php echo $articulo->getSexo(); ?></td>
+                                            <td><?php echo $articulo->getPrecio(); ?></td>
+                                            <td><?php echo $articulo->getImagen(); ?></td>
+                                            <td><?php echo $articulo->getStock(); ?></td>
+                                            <td><a style="display: block" class="delete" data-id="<?php echo $articulo->getId(); ?>">X</a></td>
+                                            <td class="id" data-id="<?php echo $articulo->getId(); ?>" style="display:none"><?php echo $articulo->getId(); ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- container -->
+
+    <!-- The template to display files available for upload -->
+    <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-upload fade">
+            <td>
+                <span class="preview"></span>
+            </td>
+            <td>
+                <p class="name">{%=file.name%}</p>
+                {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                {% } %}
+            </td>
+            <td>
+                <p class="size">{%=o.formatFileSize(file.size)%}</p>
+                {% if (!o.files.error) { %}
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                     aria-valuenow="0">
+                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                </div>
+                {% } %}
+            </td>
+            <td class="form-group"><input name="articulo[{%=file.name%}][descripcion]" type="text" placeholder="Descripcion" required="required" class="form-control"></td>
+            <td class="form-group">
+                <select name="articulo[{%=file.name%}][categoria]" class="form-control" required="required">
+                    <option value=""></option>
+                    <option value="1">Remera</option>
+                    <option value="2">Pantalon</option>
+                    <option value="3">Buzo</option>
+                    <option value="4">Musculosa</option>
+                    <option value="5">Campera</option>
+                    <option value="6">Mono</option>
+                    <option value="7">Short</option>
+                    <option value="8">Bermuda</option>
+                    <option value="9">Joggin</option>
+                    <option value="10">Vestido</option>
+                    <option value="11">Pollera</option>
+                </select>
+            </td>
+            <td class="form-group"><input name="articulo[{%=file.name%}][color]" type="text" placeholder="Color" required="required" class="form-control"></td>
+            <td class="form-group">
+                <select name="articulo[{%=file.name%}][talle]" class="form-control" required="required">
+                    <option value=""></option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="X">X</option>
+                    <option value="XL">XL</option>
+                </select>
+            </td>
+            <td class="form-group">
+                <select name="articulo[{%=file.name%}][sexo]" class="form-control" required="required">
+                    <option value=""></option>
+                    <option value="H">Hombre</option>
+                    <option value="M">Mujer</option>
+                    <option value="U">Unisex</option>
+                </select>
+            </td>
+            <td class="form-group"><input name="articulo[{%=file.name%}][precio]" type="text" placeholder="Precio" required="required" class="form-control"></td>
+            <td>
+                {% if (!o.files.error && !i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start">
+                    <i class="fa fa-upload"></i>
+                    <span>Start</span>
+                </button>
+                {% } %}
+                {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="fa fa-ban"></i>
+                    <span>Cancel</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-download fade">
+            <td>
+    <span class="preview">
+        {% if (file.thumbnailUrl) { %}
+            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img
+                    src="{%=file.thumbnailUrl%}"></a>
+        {% } %}
+    </span>
+            </td>
+            <td>
+                <p class="name">
+                    {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}">
+                        {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                    {% } else { %}
+                    <span>{%=file.name%}</span>
+                    {% } %}
+                </p>
+                {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                {% } %}
+            </td>
+            <td>
+                <span class="size">{%=o.formatFileSize(file.size)%}</span>
+            </td>
+            <td>
+                {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}">{% if
+                    (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}
+                    <i class="fa fa-trash "></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+                {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="fa fa-ban"></i>
+                    <span>Cancel</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>

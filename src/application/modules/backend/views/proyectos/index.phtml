@@ -1,0 +1,114 @@
+        <div id="page-heading">
+            <ol class="breadcrumb">
+                <li><a href="index.php">Dashboard</a></li>
+                <li>Catalogos</li>
+            </ol>
+
+            <h1>Catalogos</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                            <h4>Lista de catalogos actuales</h4>
+                            <div class="options">   
+                                <a href="javascript:;"><i class="fa fa-cog"></i></a>
+                                <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+                            <div class="alert alert-info">
+                                Para ver los articulos de un catalogo, haga click sobre la misma.
+                                <button data-dismiss="alert" class="close" type="button">×</button>
+                            </div>
+
+                            <div id="crudtable_wrapper" class="dataTables_wrapper" role="grid">
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="crudtable">
+                                    <thead>
+                                        <tr>
+                                            <th>Catalogo</th>
+                                            <th>Fecha</th>
+                                            <th>Estado</th>
+                                            <th>Id</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($this->catalogos as $catalogo): ?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $catalogo->getNombre(); ?></td>
+                                            <td><?php echo $catalogo->getFecha()->format('d-m-Y'); ?></td>
+                                            <td><?php echo $catalogo->getEstado(); ?></td>
+                                            <td class="id"><?php echo $catalogo->getId(); ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                            <h4>Lista de Articulos</h4>
+                            <div class="options">   
+                                <a href="javascript:;"><i class="fa fa-cog"></i></a>
+                                <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+                            <div id="crudtable_wrapper_list" class="dataTables_wrapper" role="grid" style="float: left; width: 75%; min-height: 270px;">
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Categoria</th>
+                                            <th>Color</th>
+                                            <th>Talle</th>
+                                            <th>Sexo</th>
+                                            <th>Precio</th>
+                                            <th>Borrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="articulosCampanaSeleccionada">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="float: left; width: 25%">
+                                <form action="" class="form-horizontal row-border"  data-validate="parsley" id="validate-form">
+                                    <div class="form-group" style="margin: 0; padding-top: 10px">
+                                        <div>
+                                            <div class="ms-container" style="background: none; width: 100%">
+                                                <div class="ms-selectable" style="width: 100%; margin: 0; overflow: hidden">
+                                                    <input id="sArticulos" class="form-control" style="margin-bottom: 10px;" autocomplete="off" placeholder="Filtrar..." type="text">
+                                                    <ul tabindex="-1" class="ms-list">
+                                                        <?php foreach ($this->artis as $articulo): ?>
+                                                            <li id="<?php echo $articulo->getId(); ?>" class="ms-elem-selectable ui-state-disabled">
+                                                                <span><?php echo $articulo->getCategoria()->getNombre(); ?> : <?php echo $articulo->getId(); ?></span>
+                                                            </li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div> <!-- container -->
+
+
+    <script>
+        var articulos = <?php echo $this->articulos; ?>;
+        var catalogoArticulos = <?php echo $this->catalogoArticulos; ?>;
+    </script>

@@ -1,0 +1,271 @@
+        <div id="page-heading">
+            <ol class="breadcrumb">
+                <li><a href="index.php">Dashboard</a></li>
+                <li>Campa&ntilde;as</li>
+            </ol>
+
+            <h1>Campa&ntilde;as</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                            <h4>Agregar Articulos</h4>
+                        </div>
+                        <div class="panel-body collapse in">
+
+                            <!-- The file upload form used as target for the file upload widget -->
+                            <form id="fileupload" action="/api/campanas/addarticulo" method="POST" enctype="multipart/form-data">
+                                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                                <div class="row fileupload-buttonbar">
+                                    <div class="col-lg-7">
+                                    <div class="btn-toolbar">
+                                        <!-- The fileinput-button span is used to style the file input field as button -->
+                                        <span class="btn btn-success fileinput-button">
+                                            <i class="fa fa-plus"></i>
+                                            <span>Add files...</span>
+                                            <input type="file" name="files[]" multiple>
+                                        </span>
+                                        <button type="submit" class="btn btn-primary start">
+                                            <i class="fa fa-upload"></i>
+                                            <span>Start upload</span>
+                                        </button>
+                                        <button type="reset" class="btn btn-warning cancel">
+                                            <i class="fa fa-ban"></i>
+                                            <span>Cancel upload</span>
+                                        </button>
+<!--
+                                        <button type="button" class="btn btn-danger delete">
+                                            <i class="fa fa-trash-o"></i>
+                                            <span>Delete</span>
+                                        </button>
+                                        <input type="checkbox" class="toggle">
+                                        The loading indicator is shown during file processing 
+-->
+                                        <span class="fileupload-loading"></span>
+                                    </div>
+                                    </div>
+                                    <!-- The global progress information -->
+                                    <div class="col-lg-5 fileupload-progress fade">
+                                        <!-- The global progress bar -->
+                                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                        </div>
+                                        <!-- The extended global progress information -->
+                                        <div class="progress-extended">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <!-- The table listing the files available for upload/download -->
+                                <table role="presentation" class="table table-striped">
+                                    <tbody class="files"></tbody>
+                                </table>
+
+                                <input type="hidden" name="campana" value="" id="campana-id">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                            <h4>Lista de campa&ntilde;as actuales</h4>
+                            <div class="options">   
+                                <a href="javascript:;"><i class="fa fa-cog"></i></a>
+                                <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+                            <div class="alert alert-info">
+                                Para ver los articulos de una campana, haga click sobre la misma.
+                                <button data-dismiss="alert" class="close" type="button">×</button>
+                            </div>
+
+                            <button id="create-campain" class="btn btn-default" style="float: left">Crear</button>
+
+                            <button id="edit-campain" class="btn btn-default disabled" style="float: left;margin-left: 10px">Editar</button>
+
+                            <button id="delete-campain" class="btn btn-default" style="float: left;margin-left: 10px">Borrar</button>
+
+                            <div id="crudtable_wrapper" class="dataTables_wrapper" role="grid">
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="crudtable">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Campa&ntilde;a</th>
+                                            <th>Descripcion Portada</th>
+                                            <th>Descripcion</th>
+                                            <th>Portada</th>
+                                            <th>Estado</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($this->campanas as $campana): ?>
+                                        <tr class="odd gradeX">
+                                            <td class="id"><?php echo $campana->getId(); ?></td>
+                                            <td><?php echo $campana->getNombre(); ?></td>
+                                            <td><?php echo $campana->getPortadadesc(); ?></td>
+                                            <td><?php echo $campana->getDescripcion(); ?></td>
+                                            <td><?php echo $campana->getPortada(); ?></td>
+                                            <td><?php echo $campana->getEstado(); ?></td>
+                                            <td><?php echo $campana->getFecha()->format('d-m-Y'); ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="panel panel-indigo">
+                        <div class="panel-heading">
+                            <h4>Lista de Articulos</h4>
+                            <div class="options">   
+                                <a href="javascript:;"><i class="fa fa-cog"></i></a>
+                                <a href="javascript:;"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+                            <div id="crudtable_wrapper_list" class="dataTables_wrapper" role="grid" style="height: 479px; overflow-y: scroll">
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Imagen</th>
+                                            <th>Orden</th>
+                                            <th>Borrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="articulosCampanaSeleccionada">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </div> <!-- container -->
+
+    <div id="dialog-form" title="Crear nueva Campaña">
+        <p class="validateTips">Todo los campos son requeridos.</p>
+        <form action="/api/campanas/create" method="POST" target="framecampana" enctype="multipart/form-data" id="campanaform">
+            <fieldset>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="data[nombre]" id="nombre" class="text ui-widget-content ui-corner-all"><br>
+                <label for="descripcion">Descripción Portada</label>
+                <input type="text" name="data[descripcion_portada]" id="descripcion_portada" value="" class="text ui-widget-content ui-corner-all"><br>
+                <label for="descripcion">Descripción</label>
+                <input type="text" name="data[descripcion]" id="descripcion" value="" class="text ui-widget-content ui-corner-all"><br>
+                <label for="portada">Portada</label>
+                <input type="file" name="portada" id="portada" class="text ui-widget-content ui-corner-all"><br>
+                <label for="estado">Estado</label>
+                <select name="data[estado]" id="estado" class="text ui-widget-content ui-corner-all">
+                    <option value="1">Habilitada</option>
+                    <option value="0">Deshabilitada</option>
+                </select><br>
+                <label for="fecha">Fecha</label>
+                <input type="text" name="data[fecha]" id="fecha" class="text ui-widget-content ui-corner-all"><br>
+            </fieldset>
+        </form>
+    </div>
+
+
+    <!-- The template to display files available for upload -->
+    <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-upload fade">
+            <td>
+                <span class="preview"></span>
+            </td>
+            <td>
+                <p class="name">{%=file.name%}</p>
+                {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                {% } %}
+            </td>
+            <td>
+                <p class="size">{%=o.formatFileSize(file.size)%}</p>
+                {% if (!o.files.error) { %}
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                     aria-valuenow="0">
+                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                </div>
+                {% } %}
+            </td>
+            <td>
+                {% if (!o.files.error && !i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start">
+                    <i class="fa fa-upload"></i>
+                    <span>Start</span>
+                </button>
+                {% } %}
+                {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="fa fa-ban"></i>
+                    <span>Cancel</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-download fade">
+            <td>
+    <span class="preview">
+        {% if (file.thumbnailUrl) { %}
+            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img
+                    src="{%=file.thumbnailUrl%}"></a>
+        {% } %}
+    </span>
+            </td>
+            <td>
+                <p class="name">
+                    {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}">
+                        {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                    {% } else { %}
+                    <span>{%=file.name%}</span>
+                    {% } %}
+                </p>
+                {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                {% } %}
+            </td>
+            <td>
+                <span class="size">{%=o.formatFileSize(file.size)%}</span>
+            </td>
+            <td>
+                {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}">{% if
+                    (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}
+                    <i class="fa fa-trash "></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+                {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="fa fa-ban"></i>
+                    <span>Cancel</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+
+    <script>
+        var campanaArticulos = <?php echo $this->campanaArticulos; ?>;
+    </script>

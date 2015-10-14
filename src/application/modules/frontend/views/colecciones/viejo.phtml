@@ -1,0 +1,38 @@
+
+			<div class="index-content tituloCatalogo">
+				<h2>Colecciones<small>Diferentes colecciones</small></h2>
+				<span class="dash"></span>
+			</div>
+			<div class="index-content">
+                <div class="row">
+                    <ul class="filters">
+                        <li>
+                            <a data-filter="*" href="#" class="active">Todos</a>
+                        </li>
+                        <?php foreach ($this->contenido as $carpeta => $archivos): ?>
+                        <li>
+                            <a data-filter="<?php echo $carpeta; ?>" href="#"><?php echo $carpeta; ?></a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div><!-- row -->
+            </div>
+
+			<div class="index-content catalogoProductos imagenes isotope">
+                <?php foreach ($this->contenido as $carpeta => $archivos): ?>
+                   <?php foreach ($archivos as $index => $archivo): ?> 
+                        <?php $file = "/public/assets/contenido/colecciones/$carpeta/$archivo"; ?>
+                        <div class="imagen element-item <?php echo $carpeta; ?>">
+                            <a href="<?php echo $file; ?>" data-lightbox="image-<?php echo $index; ?>" data-title="<?php echo $archivo; ?>">
+                                <img src="<?php echo $file; ?>" />
+                            </a>
+                            <div class="caracteristicas">
+                                <h3><?php echo $archivo; ?></h3>
+                                <p>descripcion</p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+			</div>
+			<div class="clearfix"></div>
+

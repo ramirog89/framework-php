@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * @uses      Initialize application framework
+ * @category  Core
+ * @package   Core\Application
+ * @author    Ramiro Gonzalez
+ * @version   1.0
+ * @copyright dev@devartdesign.com
+ *****************************************************/
+
 namespace Core;
 // Esto seria un Facade de la aplicacion?.. ponele..
 class Application

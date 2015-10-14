@@ -9,6 +9,8 @@ class Front
 	protected $_route;
 
 	protected $_bootstrap;
+
+	/** Aca deberia ir el controller, action y params **/
 	
 	private function __construct() 
 	{

@@ -1,10 +1,10 @@
         <div id="page-heading">
             <ol class="breadcrumb">
                 <li><a href="index.php">Dashboard</a></li>
-                <li>Campa&ntilde;as</li>
+                <li>Colecciones</li>
             </ol>
 
-            <h1>Campa&ntilde;as</h1>
+            <h1>Colecciones</h1>
         </div>
 
         <div class="container">
@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-indigo">
                         <div class="panel-heading">
-                            <h4>Agregar Articulos</h4>
+                            <h4>Agregar Items</h4>
                         </div>
                         <div class="panel-body collapse in">
 
@@ -72,7 +72,7 @@
                 <div class="col-md-7">
                     <div class="panel panel-indigo">
                         <div class="panel-heading">
-                            <h4>Lista de campa&ntilde;as actuales</h4>
+                            <h4>Lista de albums actuales</h4>
                             <div class="options">   
                                 <a href="javascript:;"><i class="fa fa-cog"></i></a>
                                 <a href="javascript:;"><i class="fa fa-wrench"></i></a>
@@ -96,24 +96,19 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Campa&ntilde;a</th>
-                                            <th>Descripcion Portada</th>
-                                            <th>Descripcion</th>
+                                            <th>Album</th>
                                             <th>Portada</th>
-                                            <th>Estado</th>
-                                            <th>Fecha</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($this->campanas as $campana): ?>
+                                        <?php foreach ($this->albums as $album): ?>
                                         <tr class="odd gradeX">
-                                            <td class="id"><?php echo $campana->getId(); ?></td>
-                                            <td><?php echo $campana->getNombre(); ?></td>
-                                            <td><?php echo $campana->getPortadadesc(); ?></td>
-                                            <td><?php echo $campana->getDescripcion(); ?></td>
-                                            <td><?php echo $campana->getPortada(); ?></td>
-                                            <td><?php echo $campana->getEstado(); ?></td>
-                                            <td><?php echo $campana->getFecha()->format('d-m-Y'); ?></td>
+                                            <td class="id"><?php echo $album['id_album']; ?></td>
+                                            <td><?php echo $album['album']; ?></td>
+                                            <td></td>
+                                            <!-- portada?
+                                            <td><php echo $campana->getPortada(); ?></td>
+                                            -->
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -126,7 +121,7 @@
                 <div class="col-md-5">
                     <div class="panel panel-indigo">
                         <div class="panel-heading">
-                            <h4>Lista de Articulos</h4>
+                            <h4>Lista de Items</h4>
                             <div class="options">   
                                 <a href="javascript:;"><i class="fa fa-cog"></i></a>
                                 <a href="javascript:;"><i class="fa fa-wrench"></i></a>

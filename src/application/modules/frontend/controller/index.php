@@ -6,20 +6,16 @@ class Index extends \Core\ControllerAction
 	
 	public function indexAction($args)
 	{
-		$this->_view->a = 'pepe';
+		// Load database Object
+        $database = $this->_front
+        				 ->getBootstrap()
+        				 ->getResource('sqlite');
 
-        $database = $this->_front->getBootstrap()->getResource('database');
+        // Execute query
+        $rs = $database->query("SELECT * FROM productoAlbum");
 
-        $albums = $database->query("select aC.*, c.* from catalogo c, albumCatalogo aC WHERE c.id_catalogo = aC.id_catalogo");
-
-    echo "<pre>";
-        var_dump($albums->fetch());
-    exit;
-
-
-        $ultimosProductos = $database->query('SELECT * FROM productos');
-
-
+        // Fetch data and injected on the view
+        $this->_view->_ultimos = $rs->fetchAll();
 	}
 	
 }

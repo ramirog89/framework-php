@@ -13,6 +13,8 @@ class Sqlite
 
     protected $_sql;
 
+    protected $_error;
+
     public function __construct($config)
     {
         $this->_connect(
@@ -23,86 +25,38 @@ class Sqlite
         );
     }
 
-    public function query($sql = null)
+    public function query
+    (
+        $sql = null, 
+        $bindValues = array()
+    )
     {
         if (is_null($sql)) 
             die('Debe ingresar una consulta SQL');
 
         $this->_sql = $sql;
 
-        $this->_queryResource = sqlite_query(
-            $this->_cnx, $this->_sql
-        );
+        $this->_queryResource = $this->_cnx->prepare($sql);
 
-        if ($query_error)
-            die("Error: " . $query_error);
+        if (!empty($bindValues)) {
+            foreach($bindValues as $key => $value) {
+                $this->_queryResource->bindValue($key, $value);
+            }
+        }
 
-        if (!$this->_queryResource)
-            die("No se pudo ejecutar la consulta");
-
+        $this->_queryResource->execute();
+      
         return $this;
     }
 
-
-    public function getSchema()
+    public function getError()
     {
-        $tables = $this->_getTables();
-        $schemaTables = array();
-
-        foreach ($tables as $table) {
-            $schemaTables[$table]   = $this->_getTableSchema( $table );
-        }
-
-        return $schemaTables;
+        return $this->_error;
     }
 
-    public function createTable($table)
+    public function fetchAll()
     {
-        $this->_sql = 'CREATE TABLE ';
-        return $this->_query();
-    }
-
-    public function alterTable()
-    {}
-
-    private function _getTables()
-    {
-        $this->_sql = 'show tables';
-        return $this->_query()
-                    ->_fetch();
-    }
-
-    private function _getTableSchema($table)
-    {
-        $this->_sql = "SELECT column_name,data_type 
-                FROM information_schema.columns 
-                WHERE table_schema = '" . $this->_database . "'
-                AND   table_name   = '" . $table . "'
-                ORDER BY column_name";
-
-        return $this->_query()
-                    ->_fetchSchema();
-    }
-
-    private function _fetchSchema()
-    {
-        $result = array();
-
-        while ($rs = sqlite_fetch_array($this->_queryResource)) {
-            $result[$rs['column_name']] = $rs['data_type'];
-        }
-
-        return $result;
-    }
-
-    public function fetch()
-    {
-        $result = array();
-
-        while ($row = sqlite_fetch_array($this->_queryResource)) {
-            array_push($result, $row);
-        }
-
+        $result = $this->_queryResource->fetchAll();
         return $result;
     }
 
@@ -114,12 +68,16 @@ class Sqlite
         $databaseFile
     ) 
     {
-        $this->_database = $databaseFile;
-        $this->_cnx = sqlite_open($this->_database, 0666, $error);
-        if (!$this->_cnx) {
-            $error = (file_exists($this->_database)) ? "Impossible to open, check permissions" : "Impossible to create, check permissions";
-            die($error);
+        try {
+            $this->_cnx = new PDO('sqlite:' . APPLICATION_PATH . $databaseFile);
+            return true;
+        } catch (PDOException $e) {
+            $this->_error = "PDO database connection problem: " . $e->getMessage();
+        } catch (Exception $e) {
+            $this->_error = "General problem: " . $e->getMessage();
         }
+
+        return false;
     }
 
 }

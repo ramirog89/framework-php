@@ -2,27 +2,25 @@
 
 return array(
     'language' => array(
-    	'path' => 'lang/',
+    	'path' => 'data/languages/',
     	'lang' => 'es'
     ),
 
-    'database' => array(
+    'sqlite' => array(
     	'local' => array(
-    		'adapter'  => 'Mysql',
     		'hostname' => 'localhost',
     		'username' => 'root',
-    		'password' => '',
-    		'database' => 'testfw'
+    		'password' => 'c4c4fr1t489',
+    		'database' => 'data/database/fw.db'
     	)
     ),
 
     'cache' => array(
-    	'adapter' => 'Memcache',
     	'host'    => 'localhost',
     	'port'    => '11211'
     ),
 
-    'acl' => array()
+    //'acl' => array()
 );
 
 ?>

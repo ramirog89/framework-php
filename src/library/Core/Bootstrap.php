@@ -5,8 +5,10 @@ class Bootstrap
 {
 
 	protected $_configPath = APPLICATION_PATH . 'config/';
+
+    protected $_path       = LIBRARY_PATH . 'Core/Resources/';
 	
-	protected $_resources = array();
+	protected $_resources  = array();
 
 	public function __construct()
 	{
@@ -26,9 +28,19 @@ class Bootstrap
 	protected function _init()
 	{
 		$resources = $this->_loadConfig();
+
 		if (!empty($resources)) {
-			foreach ($resources as $resource) {
-				$this->_resources[$resource] = new $resource();
+			foreach ($resources as $resource => $params) {
+                $absResourcePath = $this->_path
+                                 . ucfirst($resource) 
+                                 . '.php';
+
+                $newResource     = include_once($absResourcePath); 
+
+                // Tengo que configurar los Adaptadores..
+                // Para el database y el cache
+                $reflection = new \ReflectionClass($resource);
+				$this->_resources[$resource] = $reflection->newInstanceArgs($params);
 			}
 		}
 	}
@@ -37,7 +49,7 @@ class Bootstrap
 	{
 		$settingsFile = $this->_configPath . 'settings.php';
 		if (file_exists($settingsFile))
-			return file_get_contents($settingsFile);
+			return include_once($settingsFile);
 		else
 			die('No existe el archivo settings.php');
 	}

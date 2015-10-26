@@ -1,6 +1,5 @@
 <?php
-
-set_time_limit(0);
+namespace Core;
 
 class Thumbnail
 {
@@ -19,11 +18,11 @@ class Thumbnail
 
 	protected $_files = array();
 
-	public function __construct($path)
+	public function __construct($path = null)
 	{
-		$this->_directoryPath = $path;
-		$this->_readDir($this->_directoryPath);
-		return $this;
+		//$this->_directoryPath = $path;
+		//$this->_readDir($this->_directoryPath);
+		//return $this;
 	}
 
 	public function generate()
@@ -110,11 +109,3 @@ class Thumbnail
 
 }
 
-$thumbs = new Thumbnail('test');
-
-$thumbs->setWidth(250)
-	   ->setHeight(250)
-	   ->generate();
-
-echo "<pre>";
-var_dump($thumbs);

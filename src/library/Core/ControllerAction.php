@@ -1,11 +1,19 @@
 <?php
 namespace Core;
-//Aca es donde zend tiene los predispatch. y demases..?... que los ejecuta con el bootstarp .
-// y el viewwww.. jojo
+
+// Life cycle request? .. predispatch, dispatch, postdispatch.. kuak
+
 abstract class ControllerAction
 {
 
 	protected $_view;
+
+    protected $_front;
+
+    public function __construct($front)
+    {
+        $this->_front = $front;
+    }
 
 	public function setView(\Core\View $view)
 	{
@@ -17,6 +25,6 @@ abstract class ControllerAction
 	{
 		$this->_view->render();
 	}
-	
+
 }
 

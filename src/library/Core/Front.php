@@ -8,13 +8,13 @@ class Front
 
 	protected $_route;
 
-	protected $_bootstrap;
+	static protected $_bootstrap;
 
 	/** Aca deberia ir el controller, action y params **/
 	
 	private function __construct() 
 	{
-		$this->_bootstrap = new \Core\Bootstrap(); // aca va elconfig?
+		self::$_bootstrap = new \Core\Bootstrap(); // aca va elconfig?
 	}
 	
 	private function __clone(){}
@@ -29,6 +29,7 @@ class Front
 
     // Tiene que haber un SetPaths.. algo asi del Core..
 	
+    // El router, routea.. no hace lo del params,action,controller.. solo routea
 	public function setRouter(Route $router)
 	{
 		$this->_route = $router;
@@ -40,9 +41,18 @@ class Front
 		return $this->_route;
 	}
 
-	// Esto va a funcionar como un API rest..
-    // Este execute simplemente ejecuta el echo json_encode
-    // con el try catch...
+    static public function getBootstrap()
+    {
+        return self::$_bootstrap;
+    }
+
+    static public function getStaticBootstrap()
+    {
+        return $this->_bootstrap;
+    }
+
+    // aca lo que debe ejecutarse es el route... que rutea.. kuak
+    // con la data del front 
 	public function execute()
 	{
 		// Defino si es modulo frontend o backend(admin)
@@ -65,7 +75,7 @@ class Front
         }
 
         // Existe el controller entonces lo instanciamos
-		$controller = new $controllerNSPath();
+		$controller = new $controllerNSPath($this);
 
 		// Defino el action
         $routeAction = strtolower($this->_route->getAction());
@@ -101,5 +111,5 @@ class Front
             // no existe el action pedido..
         }
 	}
-		
+
 }

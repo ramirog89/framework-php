@@ -8,18 +8,18 @@ class Index extends \Core\ControllerAction
 	{
 		$this->_view->a = 'pepe';
 
-        $this->_view->appendStylesheet("/public/assets/css/bootstrap.css")
-                    ->appendStylesheet("/public/assets/css/estilo.css")
-                    ->appendStylesheet("/public/assets/css/nivo-slider.css")
-                    ->appendStylesheet("/public/assets/css/lightbox.css")
-                    ->appendStylesheet("/public/assets/css/screen.css");
-                
+        $database = $this->_front->getBootstrap()->getResource('database');
 
-        $this->_view->appendJavascript("/public/assets/js/jquery.min.js")
-                    ->appendJavascript("/public/assets/js/jquery.nivo.slider.js")
-                    ->appendJavascript("/public/assets/js/lightbox.min.js")
-                    ->appendJavascript("/public/assets/js/isotope.min.js")
-                    ->appendJavascript("/public/assets/js/index.js");
+        $albums = $database->query("select aC.*, c.* from catalogo c, albumCatalogo aC WHERE c.id_catalogo = aC.id_catalogo");
+
+    echo "<pre>";
+        var_dump($albums->fetch());
+    exit;
+
+
+        $ultimosProductos = $database->query('SELECT * FROM productos');
+
+
 	}
 	
 }

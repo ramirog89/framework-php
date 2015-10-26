@@ -2,28 +2,31 @@
 
 class Cache
 {
-    
-    private $_host    = 'local';
 
-    private $_baseUrl = 'http://noticias.mtvla.com/feeds/';
+    const DEFAULT_PORT = '11211';
+    const DEFAULT_HOST = 'localhost';
+
+    private $_settings = array(
+        'host' => null,
+        'port' => null
+    );
+
+    private $_baseUrl = 'localhost/';
 
     private $_endpoint;
 
-    private $_memcache;
-
-    private $_settings = array(
-        'memcache' => array(
-            'local' => array(
-                'host' => 'localhost',
-                'port' => '11211'
-            )
-        )
-    );
+    private $_cnx;
 
     private $_content;
 
-    public function __construct()
+    public function __construct(
+        $host,
+        $port
+    )
     {
+		$this->_settings['host'] = (!is_null($host)) ? $host : self::DEFAULT_HOST;
+		$this->_settings['port'] = (!is_null($port)) ? $port : self::DEFAULT_PORT;
+
         $this->_memcacheConnect();
     }
 
@@ -53,7 +56,7 @@ class Cache
     {
         $uri = $this->_baseUrl . $this->_endpoint;
 
-        $this->_content = $this->_memcache->get($uri);
+        $this->_content = $this->_cnx->get($uri);
 
         if ($this->_content == false) {
             $ch = curl_init();
@@ -62,7 +65,7 @@ class Cache
             $this->_content = curl_exec($ch);
             curl_close($ch);
 
-            $this->_memcache->set($this->_endpoint, $this->_content);
+            $this->_cnx->set($this->_endpoint, $this->_content);
         }
 
         return $this;
@@ -70,11 +73,11 @@ class Cache
 
     private function _memcacheConnect()
     {
-        $this->_memcache = new Memcache;
+        $this->_cnx = new Memcache;
 
-        $this->_memcache->connect(
-            $this->_settings['memcache'][$this->_host]['host'],
-            $this->_settings['memcache'][$this->_host]['port']
+        $this->_cnx->connect(
+            $this->_settings['host'],
+            $this->_settings['port']
         ) or die ('Could not connect to memcache server');
 
         return $this;
@@ -82,6 +85,3 @@ class Cache
 
 }
 
-echo "<pre>";
-$feed = new Feed();
-var_dump($feed);

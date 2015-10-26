@@ -15,10 +15,10 @@ class View extends ViewAbstract
 
     protected $_javascripts = array();
 
-    protected $_helpers = array();
 	
 	public function __construct($path)
 	{
+        parent::__construct();
         try {
             $this->_setFile($path);
         } catch (\Exception $e) {
@@ -41,31 +41,6 @@ class View extends ViewAbstract
 			$this->_setBody();
 			echo $this->_body;
 	}
-
-    // Cuando se llama a un objeto en la View,
-    // se pide por el helper que este en La view
-    public function __call($method, $args)
-    {
-        if (!isset($this->_helpers[$method])) {
-            $this->_registerHelper($method);
-        }
-
-        return $this->_loadHelper($method, $args);
-    }
-
-    protected function _loadHelper($helper, $args)
-    {
-        $h = $this->_helpers[$helper];
-        return new $h($args);
-    }
-
-    protected function _registerHelper($helper)
-    {
-        $pathToHelper = FRONTEND_PATH . 'views/helpers/' . $helper . '.php';
-        include_once($pathToHelper);
-        $helperClassName = '\Frontend\ViewHelper\\' . $helper;
-        $this->_helpers[$helper] = $helperClassName;
-    }
 
     public function getStylesheets()
     {

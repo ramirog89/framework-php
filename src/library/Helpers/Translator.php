@@ -7,17 +7,15 @@ class Translator
     // Current language setted
     protected $_lang = null;
 
-	public function __construct($key = null)
+	public function __construct()
 	{
         $bootstrap   = \Core\Front::getBootstrap();
         $this->_lang = $bootstrap->getResource('language');
-
-        //$this->get($key);
 	}
 	
 	public function get($key) 
 	{
-        $value = $this->_lang->keyMap[$key];
+        $value = $this->_lang->translate($key);
 		return (isset($value)) ? $value : '';
 	}
 	

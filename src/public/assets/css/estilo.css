@@ -1,0 +1,637 @@
+
+@font-face {
+  font-family: 'Oswald-Light';
+  src: url("../fonts/Oswald-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+*, html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+	border:none;
+    font-family: 'Oswald-Light';
+    letter-spacing: 1px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+/* ------Mobile Class------*/
+.mobile {
+    display: none;
+}
+/* ------Links------*/
+a, a:link, a:visited {
+	font-family: "Oswald-Light", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #b0b0b0;
+	text-decoration: none;
+	line-height:18px;
+	outline: none !important;
+}
+
+/* ------Capa Wrapper total------*/
+.wrapper {
+	margin: 0;
+	height:100%;
+	width:100%;
+}	
+
+/*----Header-----*/
+.header	{
+	height: 70px;
+	width:100%;
+	margin:0 auto;
+}
+
+.header-separator {
+	clear: both;
+	width: 100%;
+	height: 1px;
+	box-shadow: 0 1px 0 #e0e0e0;
+}
+
+.menu	{
+	text-align: center;
+	font-size: 0.7em;
+	width: 100%;
+	height:100%;
+	margin: 0 auto;
+	line-height: 70px;
+}
+.top-menu   {
+    background: #222 none repeat scroll 0 0;
+    color: #3a3a3a;
+    position: relative;
+    z-index: 200;
+    height: 35px;
+    width: 100%;
+    clear: both;
+}
+.contenedor-topmenu {
+    width: 1170px;
+    clear: both;
+    margin: 0 auto;
+    padding: 0 5px 0 5px;
+}
+.contenedor-topmenu p {
+    color: #afafaf;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+.titulo-topmenu p {
+    text-align: center;
+    padding-top: 7px;
+    letter-spacing: 10px;
+}
+.col-izq {
+    width: 50%;
+    float: left;
+}
+.col-der {
+    width: 50%;
+    float: left;
+    text-align: right;
+}
+.menu #logo {
+	background-image: url(../images/vilogo.png);
+	background-repeat: no-repeat;
+	width: 45px;
+	height: 44px;
+	margin: 16px 0;
+}
+
+.menu #search,
+.menu .menuLogo {
+	width: 15%;
+	float: left;
+	height: 100%;
+}
+
+.menu #search {
+	text-align: right;
+	line-height: 85px;
+}
+
+.search-input-env {
+    opacity: 0;
+    position: relative;
+    transition: all 120ms ease-in-out 0s;
+    visibility: hidden;
+}
+
+.search-input-env .form-control {
+    height: 35px;
+}
+
+.search-input-env .form-control {
+    border-color: #eee;
+    box-shadow: none;
+    height: 25px;
+    padding: 0;
+    position: absolute;
+    right: 5px;
+    top: 33%;
+    background-clip: padding-box;
+    border-color: #eee;
+    border-radius: 0;
+    box-shadow: none;
+    font-weight: 300;
+}
+
+.search-input-env {
+	height: 100%;
+	width: 85%;
+	float: left;
+}
+.search-btn {
+	float: right;
+	width: 15%;
+	height: 100%;
+}
+
+.search-btn svg{
+	width: 100%;
+	height: 100%;
+}
+
+form#search {
+	line-height: 70px;
+}
+
+
+.menu nav {
+	width: 70%;
+	height: 100%;
+	float: left;
+}
+
+.menu nav ul {
+	width: 100%;
+	height: 100%;
+}
+
+.menu nav ul li	{
+	position: relative;
+	float:left;
+	width: 20%;
+	height: 100%;
+}
+.menu nav ul li a {
+	display: block;
+	height: 100%;
+	line-height: 70px;
+	text-decoration: none;
+	color: #6f6f6f;
+	font-size: 14px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.1);
+	text-transform: uppercase;
+	letter-spacing:1px;
+}
+.menu ul li:hover {
+	background-color:#e8e8e8;
+}
+
+.menu ul li	ul	{
+	background-color:#e8e8e8;
+	z-index: 100;
+	display: none;
+}
+
+.menu ul li a:hover, 
+.menu ul li:hover a.nivel1 {
+	background-color: #e8e8e8;
+}
+.menu ul li:hover ul {
+	display: block;
+}
+
+.menu ul li	ul li	{
+	float: none;
+	z-index: 101;
+	width: 100%;
+	background-color: #F7F7F7;
+	border-top: 1px solid #999;
+}
+
+/*----------Contetnido----------*/
+.contenido		{
+	min-height:800px;
+	width: 100%;
+	margin: auto;
+	position: relative;
+}
+.index-content	{
+	max-width:1170px;
+	width:100%;
+	margin:0 auto;
+    clear: both;
+}
+
+.col-sm-12.index-content h2 {
+	font-size: 30px;
+	margin: 0;
+	color: #222;
+	font-weight: 300;
+	text-transform: uppercase;
+	font-family: Oswald;
+}
+
+.tituloCatalogo {
+	margin: 25px auto;
+	letter-spacing: 1px;
+}
+.tituloCatalogo h2 {
+    text-transform: uppercase;
+}
+
+.tituloCatalogo small {
+    display: block;
+    margin-top: 10px;
+    font-size: 13;
+    color: #888;
+    line-height: 1;
+    font-weight: 300;
+}
+
+
+.banner {
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 0 0 3px #ededed inset, 0 0 0 4px #eee inset;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.banner-img {
+  display: block;
+  height: auto !important;
+  line-height: 1;
+  position: relative;
+  transition: all 500ms ease-out 0s;
+  width: 100% !important;
+  z-index: 1;
+}
+
+.banner-img:hover img {
+    transform: scale(1.1);
+}
+
+.text-quienes-somos {
+	font-family: "Oswald-light";
+	letter-spacing: 1px;
+}
+
+
+
+.text-quienes-somos p {
+	font-size: 14px;
+    text-indent: 10px;
+}
+
+.index-content.catalogoProductos {
+	margin: 30px auto;
+	height: 100%;
+}
+
+.index-content.catalogoProductos.ultimosProductos li {
+	display: inline-block;
+	width: 24%;
+    margin-right: 0.7%;
+}
+
+.index-content.catalogoProductos ul li .imagen,
+.index-content.catalogoProductos ul li .caracteristicas {
+	margin: auto 0;
+	width: 100%;
+}
+
+.index-content.catalogoProductos ul li a {
+    display: block;
+}
+
+.index-content.catalogoProductos ul li .imagen {
+	height: 275px;
+	background-color: #F7F7F7;
+    overflow: hidden;
+}
+
+.index-content.catalogoProductos.isotope .imagen {
+    width: 24.5%;
+    margin: 0 5px 0 0;
+}
+
+.index-content.catalogoProductos .imagen img {
+    width: 100%;
+    height: 275px;
+    display: inline-block;
+    padding: 0px;
+}
+
+.index-content.catalogoProductos .imagen img:hover {
+    transition: all 500ms ease-out 0s;
+}
+
+.index-content.catalogoProductos ul li:hover .imagen a img {
+	transform: scale (1.1);
+}
+
+.index-content.catalogoProductos ul li .caracteristicas {
+    font-family: "Oswald-Light";
+    padding: 2px 20px;
+    letter-spacing:1px;
+    margin-bottom:30px;
+    text-align: left;
+}
+.index-content.catalogoProductos ul li .caracteristicas h3{
+	font-size: 20px;
+    font-weight: 300;
+    margin: 10px 5px 5px 0;
+	text-transform: uppercase;
+}
+.index-content.catalogoProductos ul li .caracteristicas p {
+	color:#888;
+}
+
+.index-content.catalogoProductos.isotope .caracteristicas h3 {
+    margin: 5px 0;
+}
+
+.index-content .row {
+    margin: 0;
+}
+.dash {
+  background-color: #222;
+  display: inline-block;
+  height: 2px;
+  margin: 13px 0 0 1px;
+  position: relative;
+  width: 16px;
+}
+
+/*----------Footer----------*/
+.footer {
+	background-color: #222;
+	color:#fff;
+	padding: 10px 0;
+	margin:0 auto;
+	bottom:0px;
+	text-align:center;
+
+    width: 100%;
+    z-index: 100;
+}
+
+.clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 1280px;
+}
+footer .container {
+    width: 100%;
+}
+.clearfix {
+    display: block;
+}
+
+#footer-bottom {
+    height: 165px;
+    padding-top: 47px;
+    position: relative;
+}
+
+footer p, footer p a {
+    border: 0 none;
+    color: #fff;
+    font-family: "Oswald","Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    padding: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+span.padding {
+    padding: 0 5px;
+}
+footer p span {
+    color: #555;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.page-title {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    padding-top: 30px;
+}
+
+.page-title h3 {
+	font-family: Oswald;
+    color: #222;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 24px;
+    line-height: 40px;
+}
+
+.page-title h3 small {
+    font-size: 12px;
+    color: #888;
+    display: block;
+    font-weight: 300;
+}
+
+.contact-page .contact-form .form-control {
+    background: #eee none repeat scroll 0 0;
+}
+
+.contact-page .contact-form .form-control {
+    background: #eee none repeat scroll 0 0;
+}
+
+.contact-page .form-control {
+    border-color: #eee;
+    border-radius: 0;
+    box-shadow: none;
+    font-weight: 300;
+}
+
+.contact-page .contact-form .row .col-lg-6 {
+    padding: 0;
+}
+
+.contact-page .contact-form .row .col-lg-6:first-child {
+    padding-right: 15px;
+}
+
+.row {
+	clear: both;
+	content: " ";
+	display: table;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.filters {
+    font-family: "Dosis",Arial,sans-serif;
+    list-style: outside none none;
+    margin-bottom: 30px;
+}
+
+.filters li {
+    display: inline-block;
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-right: 55px;
+    text-transform: uppercase;
+}
+
+.filters li a {
+    color: #181818;
+    padding-bottom: 20px;
+    position: relative;
+    text-decoration: none;
+}
+
+.filters li a:hover::after, .filters li a.active::after {
+    border-bottom-color: #181818;
+    width: 60px;
+}
+.filters li a::after {
+    border-bottom: 1px solid transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    transition: all 0.3s ease 0s;
+    width: 0;
+}
+
+.background-wrapper {
+    width: 100%;
+    position: relative;
+    height: 460px;
+    /*border-top: 3px solid #000; DESACTIVADO*/
+    /*border-bottom: 3px solid #000; DESACTIVADO*/
+}
+
+.background-wrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+#contactPage {
+    margin-bottom: 20px;
+}
+
+
+@media all and (max-width: 1200px) {
+    
+    .index-content {
+        padding: 0 2%;
+    }
+
+    .index-content.catalogoProductos.ultimosProductos li,
+    .index-content.catalogoProductos li {
+        width:  32%;
+    }
+
+    .index-content.catalogoProductos ul li .caracteristicas,
+    .index-content.catalogoProductos li .imagen {
+        max-width: none !important;
+    }
+}
+
+@media all and (max-width: 768px) {
+
+    .index-content.catalogoProductos.ultimosProductos li,
+    .index-content.catalogoProductos li {
+        width:  48%;
+    }
+
+    .header .menu #search {
+        display: none;
+    }
+
+}
+
+@media all and (min-width: 768px) {
+    
+    .header .menu nav {
+        display: block !important;
+    }
+}
+
+@media all and (max-width: 640px) {
+    .header { 
+        height: 100%; 
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .header .headerMenu.mobile {
+        position: absolute;
+        top: 18px;
+        right: 3%;
+        width: 50px;
+        height: 40px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .menu nav ul li {
+        border-top: 1px solid #000;
+    }
+
+    .menu nav ul li.last {
+        border-bottom: 1px solid #000;
+
+    }
+
+    .header .headerMenu.mobile i {
+        font-size: 200%;
+    }
+
+    .header .menu .menuLogo,
+    .header .menu nav, 
+    .header .menu nav ul li, 
+    .header .menu {
+        float: none;
+        width: 100%;
+    }
+
+    .header .menu nav {
+        display: none;
+    }
+
+}
+
+@media all and (max-width: 440px) {
+    
+    .index-content.catalogoProductos.ultimosProductos li,
+    .index-content.catalogoProductos li {
+        width:  100%;
+    }
+
+}
+
+/* un comentario de prueba pa git */

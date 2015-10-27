@@ -54,6 +54,11 @@ class Language
 	{
 			return $this->keyMap;
 	}
+
+    public function translate($key) 
+    {
+        return isset($this->keyMap[$key]) ? $this->keyMap[$key] : '';
+    }
 	
 	public function setPath($path) 
 	{
